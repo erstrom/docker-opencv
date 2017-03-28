@@ -47,4 +47,11 @@ cmake $OPENCV_CMAKE_VARS .. && make -j $OPENCV_J_LEVEL && make install
 [ $? -ne 0 ] && >&2 echo "ERROR: opencv build fail!" && exit 1
 popd
 
+# Generate environment setup script.
+# This script can be sourced by the user if the prefix is a local directory.
+cat << EOF > $OPENCV_INSTALL_PREFIX/setup-opencv-env
+export PATH=$OPENCV_INSTALL_PREFIX/bin:\$PATH
+export LD_LIBRARY_PATH=$OPENCV_INSTALL_PREFIX/lib
+EOF
+
 popd #pushd $OPENCV_TOP_DIR
