@@ -19,7 +19,7 @@ RUN apt-get -y install libavcodec-dev libavformat-dev libswscale-dev \
 # Other useful tools
 RUN apt-get -y install tmux
 
-RUN pip install numpy matplotlib
+RUN pip install numpy matplotlib configparser
 
 
 RUN mkdir -p /opencv/build
