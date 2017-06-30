@@ -16,6 +16,9 @@ RUN apt-get -y install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
 RUN apt-get -y install libavcodec-dev libavformat-dev libswscale-dev \
 	libv4l-dev libxvidcore-dev libx264-dev
 
+# Other useful tools
+RUN apt-get -y install tmux
+
 RUN pip install numpy matplotlib
 
 
