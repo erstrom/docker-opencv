@@ -2,8 +2,8 @@ FROM ubuntu:16.04
 
 ENV OPENCV_VERSION 3.2.0
 
-RUN apt-get -y update
 RUN apt-get -y upgrade
+RUN apt-get -y update
 
 # Build prerequisites
 RUN apt-get -y install build-essential cmake pkg-config git libgtk-3-dev \
