@@ -2,6 +2,9 @@ FROM ubuntu:16.04
 
 ENV OPENCV_VERSION 3.2.0
 
+# If INSTALL_ECLIPSE is set, eclipse + pydev will be installed
+ARG INSTALL_ECLIPSE=0
+
 RUN apt-get -y upgrade
 RUN apt-get -y update
 
@@ -20,7 +23,7 @@ RUN apt-get -y install libavcodec-dev libavformat-dev libswscale-dev \
 RUN apt-get -y install tmux
 
 # Eclipse prerequisites
-RUN apt-get -y install openjdk-9-jre wget zip
+RUN [ $INSTALL_ECLIPSE -ne 0 ] && apt-get -y install openjdk-9-jre wget zip || /bin/true
 
 RUN mkdir -p /opencv/build
 
@@ -32,7 +35,7 @@ RUN pip3 install numpy matplotlib configparser
 ADD build_opencv.sh /opencv/build/build_opencv.sh
 RUN OPENCV_VERSION=$OPENCV_VERSION /opencv/build/build_opencv.sh
 ADD eclipse_pydev_install.sh /opencv/build/eclipse_pydev_install.sh
-RUN /opencv/build/eclipse_pydev_install.sh
+RUN [ $INSTALL_ECLIPSE -ne 0 ] && /opencv/build/eclipse_pydev_install.sh || /bin/true
 WORKDIR /opencv
 
 CMD ["bash"]
