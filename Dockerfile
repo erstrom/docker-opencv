@@ -7,7 +7,7 @@ RUN apt-get -y update
 
 # Build prerequisites
 RUN apt-get -y install build-essential cmake pkg-config git libgtk-3-dev \
-	libatlas-base-dev gfortran python-dev python-pip
+	libatlas-base-dev gfortran python3.5-dev
 
 # Image related packages
 RUN apt-get -y install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
@@ -22,11 +22,13 @@ RUN apt-get -y install tmux
 # Eclipse prerequisites
 RUN apt-get -y install openjdk-9-jre wget zip
 
-RUN pip install numpy matplotlib configparser
-
-
 RUN mkdir -p /opencv/build
+
 WORKDIR /opencv/build
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3 get-pip.py
+RUN pip3 install numpy matplotlib configparser
+
 ADD build_opencv.sh /opencv/build/build_opencv.sh
 RUN OPENCV_VERSION=$OPENCV_VERSION /opencv/build/build_opencv.sh
 ADD eclipse_pydev_install.sh /opencv/build/eclipse_pydev_install.sh
