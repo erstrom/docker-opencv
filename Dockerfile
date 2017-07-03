@@ -19,6 +19,9 @@ RUN apt-get -y install libavcodec-dev libavformat-dev libswscale-dev \
 # Other useful tools
 RUN apt-get -y install tmux
 
+# Eclipse prerequisites
+RUN apt-get -y install openjdk-9-jre wget zip
+
 RUN pip install numpy matplotlib configparser
 
 
@@ -26,6 +29,8 @@ RUN mkdir -p /opencv/build
 WORKDIR /opencv/build
 ADD build_opencv.sh /opencv/build/build_opencv.sh
 RUN OPENCV_VERSION=$OPENCV_VERSION /opencv/build/build_opencv.sh
+ADD eclipse_pydev_install.sh /opencv/build/eclipse_pydev_install.sh
+RUN /opencv/build/eclipse_pydev_install.sh
 WORKDIR /opencv
 
 CMD ["bash"]
