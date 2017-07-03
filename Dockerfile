@@ -31,11 +31,17 @@ WORKDIR /opencv/build
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python3 get-pip.py
 RUN pip3 install numpy matplotlib configparser
+# pudb debugger
+RUN pip3 install pudb
 
 ADD build_opencv.sh /opencv/build/build_opencv.sh
 RUN OPENCV_VERSION=$OPENCV_VERSION /opencv/build/build_opencv.sh
 ADD eclipse_pydev_install.sh /opencv/build/eclipse_pydev_install.sh
 RUN [ $INSTALL_ECLIPSE -ne 0 ] && /opencv/build/eclipse_pydev_install.sh || /bin/true
 WORKDIR /opencv
+
+# Add tab completion for pdb
+RUN echo 'import rlcompleter' > /root/.pdbrc
+RUN echo 'pdb.Pdb.complete = rlcompleter.Completer(locals()).complete' >> /root/.pdbrc
 
 CMD ["bash"]
