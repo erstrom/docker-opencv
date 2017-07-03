@@ -22,6 +22,15 @@ Build the docker image, create a container and launch it:
 	./docker-build.sh
 	./docker-run.sh
 
+``docker-build.h`` can be replaced with ``docker-build-eclipse-pydev.sh``
+if eclipse + pydev support is wanted.
+
+The eclipse and pydev bundles will be downloaded with the script
+``eclipse_pydev_install.sh``.
+
+The download paths can be overridden by setting **ECLIPSE_URL** and
+**PYDEV_URL** environment variables from the Dockerfile.
+
 ``docker-build.h`` and ``docker-run.sh`` should only be run once unless several
 containers are needed. In this case ``docker-run.sh`` must be modified with
 different ``--name`` options for each container.
@@ -41,3 +50,14 @@ Launch an already created container
 
 	cd docker-opencv
 	./docker-start.sh
+
+OpenCV
+++++++
+
+OpenCV is built from source using the build_opencv.sh script.
+It will fetch the source code from the public OpenCV git repositories
+and build the version specified by the **OPENCV_VERSION** environment
+variable.
+
+**OPENCV_VERSION** must be a valid git tag in both the opencv and
+opencv_contrib repositories.
