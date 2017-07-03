@@ -4,14 +4,14 @@ SCRIPT_PATH=`readlink -f $0`
 SCRIPT_DIR=`dirname $SCRIPT_PATH`
 
 # Configuration env vars will be set to default values if not defined.
-[ -z $OPENCV_TOP_DIR ] && OPENCV_TOP_DIR=$SCRIPT_DIR
-[ -z $OPENCV_VERSION ] && OPENCV_VERSION="master"
-[ -z $OPENCV_INSTALL_PREFIX ] && OPENCV_INSTALL_PREFIX="/usr/local"
-[ -z $OPENCV_J_LEVEL ] && OPENCV_J_LEVEL=$((`nproc`+1))
-[ -z $OPENCV_GIT_URL ] && OPENCV_GIT_URL="https://github.com/opencv/opencv.git"
-[ -z $OPENCV_WORKING_DIR ] && OPENCV_WORKING_DIR="opencv"
-[ -z $OPENCV_CONTRIB_GIT_URL ] && OPENCV_CONTRIB_GIT_URL="https://github.com/opencv/opencv_contrib.git"
-[ -z $OPENCV_CONTRIB_WORKING_DIR ] && OPENCV_CONTRIB_WORKING_DIR="opencv_contrib"
+[[ -z ${OPENCV_TOP_DIR+x} ]] && OPENCV_TOP_DIR=$SCRIPT_DIR
+[[ -z ${OPENCV_VERSION+x} ]] && OPENCV_VERSION="master"
+[[ -z ${OPENCV_INSTALL_PREFIX+x} ]] && OPENCV_INSTALL_PREFIX="/usr/local"
+[[ -z ${OPENCV_J_LEVEL+x} ]] && OPENCV_J_LEVEL=$((`nproc`+1))
+[[ -z ${OPENCV_GIT_URL+x} ]] && OPENCV_GIT_URL="https://github.com/opencv/opencv.git"
+[[ -z ${OPENCV_WORKING_DIR+x} ]] && OPENCV_WORKING_DIR="opencv"
+[[ -z ${OPENCV_CONTRIB_GIT_URL+x} ]] && OPENCV_CONTRIB_GIT_URL="https://github.com/opencv/opencv_contrib.git"
+[[ -z ${OPENCV_CONTRIB_WORKING_DIR+x} ]] && OPENCV_CONTRIB_WORKING_DIR="opencv_contrib"
 
 OPENCV_CONTRIB_WORKING_DIR_FULL_PATH=`readlink -f $OPENCV_CONTRIB_WORKING_DIR`
 
