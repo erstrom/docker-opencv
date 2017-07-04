@@ -10,7 +10,7 @@ RUN apt-get -y update
 
 # Build prerequisites
 RUN apt-get -y install build-essential cmake pkg-config git libgtk-3-dev \
-	libatlas-base-dev gfortran python3.5-dev
+	libatlas-base-dev gfortran python3 python3.5-dev
 
 # Image related packages
 RUN apt-get -y install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
@@ -20,10 +20,10 @@ RUN apt-get -y install libavcodec-dev libavformat-dev libswscale-dev \
 	libv4l-dev libxvidcore-dev libx264-dev
 
 # Other useful tools
-RUN apt-get -y install tmux
+RUN apt-get -y install tmux wget zip
 
 # Eclipse prerequisites
-RUN [ $INSTALL_ECLIPSE -ne 0 ] && apt-get -y install openjdk-9-jre wget zip || /bin/true
+RUN [ $INSTALL_ECLIPSE -ne 0 ] && apt-get -y install openjdk-9-jre || /bin/true
 
 RUN mkdir -p /opencv/build
 
