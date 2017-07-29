@@ -30,7 +30,7 @@ RUN mkdir -p /opencv/build
 WORKDIR /opencv/build
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python3 get-pip.py
-RUN pip3 install numpy matplotlib configparser
+RUN pip3 install numpy matplotlib configparser imutils
 # pudb debugger
 RUN pip3 install pudb
 
